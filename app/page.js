@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
-  const weekDemos = [2, 3, 4];
+  const weekDemos = [2, 3, 4, 5];
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-black text-white">
       <div className="z-10 max-w-5xl w-full items-center justify-between text-sm">
