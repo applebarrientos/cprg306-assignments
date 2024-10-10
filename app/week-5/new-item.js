@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export default function Form() {
+export default function NewItem() {
   const [quantity, setQuantity] = useState(1);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
