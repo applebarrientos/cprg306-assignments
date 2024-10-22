@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export default function Counter() {
+export default function NewItem() {
   const [quantity, setQuantity] = useState(1);
   const increment = () => {
     if (quantity < 20) {
