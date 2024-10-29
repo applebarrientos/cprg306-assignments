@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 // Fetch meal ideas based on ingredient
 async function fetchMealIdeas(ingredient) {
@@ -25,10 +25,17 @@ export default function MealIdeas({ ingredient }) {
   const [selectedMeal, setSelectedMeal] = useState(null);
 
   // Load meal ideas for the given ingredient
-  const loadMealIdeas = async () => {
-    const fetchedMeals = await fetchMealIdeas(ingredient);
-    setMeals(fetchedMeals);
-  };
+  const loadMealIdeas = useCallback(() => {
+    if (ingredient) {
+      fetchMealIdeas(ingredient).then((meals) => setMeals(meals));
+    } else {
+      setMeals([]);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadMealIdeas();
+  }, [loadMealIdeas]);
 
   // Load detailed meal information when a meal is clicked
   const loadMealDetails = async (idMeal) => {
