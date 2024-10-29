@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image"; // Import Image component
 
 // Fetch meal ideas based on ingredient
 async function fetchMealIdeas(ingredient) {
@@ -31,7 +32,7 @@ export default function MealIdeas({ ingredient }) {
     } else {
       setMeals([]);
     }
-  }, []);
+  }, [ingredient]); // Include ingredient as a dependency
 
   useEffect(() => {
     loadMealIdeas();
@@ -49,13 +50,18 @@ export default function MealIdeas({ ingredient }) {
 
   return (
     <div className="ml-0 mr-10 text-white">
-      <h2 className="text-2xl font-bold mb-3">Meal Ideas for "{ingredient}"</h2>
+      <h2 className="text-2xl font-bold mb-3">
+        Meal Ideas for &quot;{ingredient}&quot;
+      </h2>{" "}
+      {/* Escaped quotes */}
       {selectedMeal ? (
         <div className="space-y-4">
           <h3 className="text-xl font-bold">{selectedMeal.strMeal}</h3>
-          <img
+          <Image // Replaced <img> with <Image>
             src={selectedMeal.strMealThumb}
             alt={selectedMeal.strMeal}
+            width={192} // Set appropriate width
+            height={192} // Set appropriate height
             className="w-48 h-48 rounded"
           />
 
@@ -92,9 +98,11 @@ export default function MealIdeas({ ingredient }) {
               className="flex items-center space-x-4 p-2 bg-slate-900 max-w-sm cursor-pointer"
               onClick={() => loadMealDetails(meal.idMeal)}
             >
-              <img
+              <Image // Replaced <img> with <Image>
                 src={meal.strMealThumb}
                 alt={meal.strMeal}
+                width={64} // Set appropriate width
+                height={64} // Set appropriate height
                 className="w-16 h-16 rounded"
               />
               <span className="text-lg">{meal.strMeal}</span>
