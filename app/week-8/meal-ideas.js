@@ -36,7 +36,7 @@ export default function MealIdeas({ ingredient }) {
 
   useEffect(() => {
     loadMealIdeas();
-  }, [loadMealIdeas]);
+  }, [loadMealIdeas]); // Keep this dependency
 
   // Load detailed meal information when a meal is clicked
   const loadMealDetails = async (idMeal) => {
@@ -46,18 +46,17 @@ export default function MealIdeas({ ingredient }) {
 
   useEffect(() => {
     if (ingredient) loadMealIdeas();
-  }, [ingredient]);
+  }, [ingredient, loadMealIdeas]); // Include loadMealIdeas as a dependency
 
   return (
     <div className="ml-0 mr-10 text-white">
       <h2 className="text-2xl font-bold mb-3">
-        Meal Ideas for &quot;{ingredient}&quot;
-      </h2>{" "}
-      {/* Escaped quotes */}
+        Meal Ideas for &quot;{ingredient}&quot; {/* Escaped quotes */}
+      </h2>
       {selectedMeal ? (
         <div className="space-y-4">
           <h3 className="text-xl font-bold">{selectedMeal.strMeal}</h3>
-          <Image // Replaced <img> with <Image>
+          <Image // Use Image component from Next.js
             src={selectedMeal.strMealThumb}
             alt={selectedMeal.strMeal}
             width={192} // Set appropriate width
@@ -98,7 +97,7 @@ export default function MealIdeas({ ingredient }) {
               className="flex items-center space-x-4 p-2 bg-slate-900 max-w-sm cursor-pointer"
               onClick={() => loadMealDetails(meal.idMeal)}
             >
-              <Image // Replaced <img> with <Image>
+              <Image // Use Image component from Next.js
                 src={meal.strMealThumb}
                 alt={meal.strMeal}
                 width={64} // Set appropriate width
