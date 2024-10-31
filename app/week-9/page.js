@@ -45,7 +45,7 @@ export default function Page() {
               Sign in with GitHub
             </button>
             <button
-              className="text-xl p-4 bg-slate-700 rounded text-white mt-2"
+              className="text-xl px-4 py-2 bg-slate-700 rounded text-white hover:bg-white hover:text-slate-700"
               onClick={() => login("google")}
             >
               Sign in with Google
