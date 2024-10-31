@@ -39,7 +39,7 @@ export default function Page() {
         ) : (
           <div className="flex flex-col items-center">
             <button
-              className="text-xl px-4 py-2 bg-slate-700 rounded text-white hover:bg-white hover:text-slate-700"
+              className="text-xl px-4 py-2 bg-slate-700 rounded text-white hover:bg-white hover:text-slate-700 mb-4"
               onClick={login}
             >
               Sign in with GitHub
