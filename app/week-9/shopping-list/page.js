@@ -11,15 +11,6 @@ import { useUserAuth } from "../_utils/auth-context";
 export default function Page() {
   const { user } = useUserAuth();
 
-  if (!user) {
-    return (
-      <main className="bg-slate-950">
-        <h2 className="text-3xl font-bold text-white">
-          You must be logged in to view this page.
-        </h2>
-      </main>
-    );
-  }
   const [items, setItems] = useState(itemsData);
   const [selectedItemName, setSelectedItemName] = useState("");
 
@@ -35,6 +26,16 @@ export default function Page() {
       .replace(/[^a-zA-Z\s]/g, "");
     setSelectedItemName(cleanName);
   };
+
+  if (!user) {
+    return (
+      <main className="bg-slate-950">
+        <h2 className="text-3xl font-bold text-white">
+          You must be logged in to view this page.
+        </h2>
+      </main>
+    );
+  }
 
   return (
     <main className="bg-slate-950">

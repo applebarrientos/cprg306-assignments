@@ -44,6 +44,12 @@ export default function Page() {
             >
               Sign in with GitHub
             </button>
+            <button
+              className="text-xl p-4 bg-slate-700 rounded text-white mt-2"
+              onClick={() => login("google")}
+            >
+              Sign in with Google
+            </button>
           </div>
         )}
       </div>
