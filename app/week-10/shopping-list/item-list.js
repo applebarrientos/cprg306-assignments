@@ -1,8 +1,9 @@
 "use client";
 import Item from "./item";
 import { useState } from "react";
+import { TrashIcon } from "@heroicons/react/outline";
 
-export default function ItemList({ items, onItemSelect }) {
+export default function ItemList({ items, onItemSelect, onDeleteItem }) {
   const [sortBy, setSortBy] = useState("name");
   const [groupBy, setGroupBy] = useState(false);
 
@@ -31,13 +32,29 @@ export default function ItemList({ items, onItemSelect }) {
             {category}
           </h2>
           {groupedItems[category].map((item) => (
-            <Item key={item.id} {...item} onSelect={onItemSelect} />
+            <div
+              key={item.id}
+              className="flex justify-between items-center px-3"
+            >
+              <Item {...item} onSelect={onItemSelect} />
+              <button onClick={() => onDeleteItem(item.id)}>
+                <TrashIcon className="h-5 w-5" />
+              </button>
+            </div>
           ))}
         </div>
       ));
     } else {
       return sortedItems.map((item) => (
-        <Item key={item.id} {...item} onSelect={onItemSelect} />
+        <div key={item.id} className="flex justify-between items-center px-3">
+          <Item {...item} onSelect={onItemSelect} />
+          <button
+            onClick={() => onDeleteItem(item.id)}
+            className="ml-2 p-1 text-red-500"
+          >
+            <TrashIcon className="h-5 w-5" />
+          </button>
+        </div>
       ));
     }
   };

@@ -3,7 +3,11 @@
 import ItemList from "./item-list";
 import NewItem from "./new-item";
 import MealIdeas from "./meal-ideas";
-import { getItems, addItem } from "../_services/shopping-list-service";
+import {
+  getItems,
+  addItem,
+  deleteItem,
+} from "../_services/shopping-list-service";
 
 import { useState, useEffect } from "react";
 import { useUserAuth } from "../_utils/auth-context";
@@ -43,6 +47,17 @@ export default function Page() {
     }
   };
 
+  const handleDeleteItem = async (itemId) => {
+    try {
+      if (user) {
+        await deleteItem(user.uid, itemId);
+        setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+      }
+    } catch (error) {
+      console.error("Error deleting item: ", error);
+    }
+  };
+
   const handleItemSelect = (name) => {
     // Clean up the name (remove size and emojis)
     const cleanName = name
@@ -68,7 +83,11 @@ export default function Page() {
       <div className="flex space-x-2">
         <div className="flex-1">
           <NewItem onAddItem={handleAddItem} />
-          <ItemList items={items} onItemSelect={handleItemSelect} />
+          <ItemList
+            items={items}
+            onItemSelect={handleItemSelect}
+            onDeleteItem={handleDeleteItem}
+          />
         </div>
         <div className="flex-1">
           {selectedItemName && <MealIdeas ingredient={selectedItemName} />}
