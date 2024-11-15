@@ -78,7 +78,7 @@ export default function Page() {
   }
 
   return (
-    <main className="bg-slate-950">
+    <main className="flex min-h-screen flex-col p-2 bg-black text-white">
       <h2 className="text-3xl font-bold text-white">Shopping List</h2>
       <div className="flex space-x-2">
         <div className="flex-1">

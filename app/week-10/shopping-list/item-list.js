@@ -34,10 +34,13 @@ export default function ItemList({ items, onItemSelect, onDeleteItem }) {
           {groupedItems[category].map((item) => (
             <div
               key={item.id}
-              className="flex justify-between items-center px-3"
+              className="flex justify-between items-center px-3 gap-1"
             >
               <Item {...item} onSelect={onItemSelect} />
-              <button onClick={() => onDeleteItem(item.id)}>
+              <button
+                onClick={() => onDeleteItem(item.id)} // Ensure item.id is the actual Firestore ID
+                className="bg-red-500 text-white px-2 py-1 rounded"
+              >
                 <TrashIcon className="h-5 w-5" />
               </button>
             </div>
@@ -46,11 +49,14 @@ export default function ItemList({ items, onItemSelect, onDeleteItem }) {
       ));
     } else {
       return sortedItems.map((item) => (
-        <div key={item.id} className="flex justify-between items-center px-3">
+        <div
+          key={item.id}
+          className="flex justify-between items-center px-3 gap-1"
+        >
           <Item {...item} onSelect={onItemSelect} />
           <button
-            onClick={() => onDeleteItem(item.id)}
-            className="ml-2 p-1 text-red-500"
+            onClick={() => onDeleteItem(item.id)} // Ensure item.id is the actual Firestore ID
+            className="bg-red-500 text-white px-2 py-1 rounded"
           >
             <TrashIcon className="h-5 w-5" />
           </button>
