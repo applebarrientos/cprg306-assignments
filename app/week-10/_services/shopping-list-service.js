@@ -1,9 +1,8 @@
 import { db } from "../_utils/firebase";
 import {
   collection,
-  addDoc,
   getDocs,
-  setDoc,
+  addDoc,
   query,
   deleteDoc,
   doc,
@@ -14,12 +13,12 @@ export const getItems = async (userId) => {
     const itemsRef = collection(db, `users/${userId}/items`);
     const itemsQuery = query(itemsRef);
     const itemsSnapshot = await getDocs(itemsQuery);
-    // const itemsSnapshot = await getDocs(itemsRef);
 
     const items = [];
     itemsSnapshot.forEach((doc) => {
-      items.push({ itemId: doc.id, ...doc.data() });
+      items.push({ id: doc.id, ...doc.data() });
     });
+
     return items;
   } catch (error) {
     console.error("Error getting items: ", error);
@@ -40,8 +39,8 @@ export const addItem = async (userId, item) => {
 
 export const deleteItem = async (userId, itemId) => {
   try {
-    const itemsRef = doc(db, `users/${userId}/items`, itemId);
-    await deleteDoc(itemsRef);
+    const itemRef = doc(db, `users/${userId}/items/${itemId}`);
+    await deleteDoc(itemRef);
     console.log(`Item with ID ${itemId} deleted successfully.`);
   } catch (error) {
     console.error("Error deleting item: ", error);
