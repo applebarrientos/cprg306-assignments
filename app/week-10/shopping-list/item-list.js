@@ -33,11 +33,14 @@ export default function ItemList({ items, onItemSelect, onDeleteItem }) {
           </h2>
           {groupedItems[category].map((item) => (
             <div
-              key={item.id}
+              key={item.docId}
               className="flex justify-between items-center px-3"
             >
               <Item {...item} onSelect={onItemSelect} />
-              <button onClick={() => onDeleteItem(item.id)}>
+              <button
+                onClick={() => onDeleteItem(item.docId)}
+                className="ml-2 p-1 text-red-500"
+              >
                 <TrashIcon className="h-5 w-5" />
               </button>
             </div>
@@ -46,10 +49,13 @@ export default function ItemList({ items, onItemSelect, onDeleteItem }) {
       ));
     } else {
       return sortedItems.map((item) => (
-        <div key={item.id} className="flex justify-between items-center px-3">
+        <div
+          key={item.docId}
+          className="flex justify-between items-center px-3"
+        >
           <Item {...item} onSelect={onItemSelect} />
           <button
-            onClick={() => onDeleteItem(item.id)}
+            onClick={() => onDeleteItem(item.docId)}
             className="ml-2 p-1 text-red-500"
           >
             <TrashIcon className="h-5 w-5" />

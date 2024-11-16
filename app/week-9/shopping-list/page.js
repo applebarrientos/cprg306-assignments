@@ -18,13 +18,34 @@ export default function Page() {
     setItems((prevItems) => [...prevItems, newItem]);
   };
 
+  // const handleItemSelect = (name) => {
+  //   // Clean up the name (remove size and emojis)
+  //   const cleanName = name
+  //     .split(",")[0]
+  //     .trim()
+  //     .replace(/[^a-zA-Z\s]/g, "");
+  //   setSelectedItemName(cleanName);
+  // };
+
   const handleItemSelect = (name) => {
-    // Clean up the name (remove size and emojis)
+    // Extract non-alphabet characters and store them
+    const nonAlphabetChars =
+      name
+        .split(",")[0]
+        .trim()
+        .match(/[^a-zA-Z\s]/g) || [];
+
+    // Clean the name by removing non-alphabet characters
     const cleanName = name
       .split(",")[0]
       .trim()
       .replace(/[^a-zA-Z\s]/g, "");
+
+    // Set the processed name
     setSelectedItemName(cleanName);
+
+    // Return the non-alphabet characters as a string
+    return nonAlphabetChars.join("");
   };
 
   if (!user) {

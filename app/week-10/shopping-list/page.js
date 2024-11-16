@@ -14,12 +14,8 @@ import { useUserAuth } from "../_utils/auth-context";
 
 export default function Page() {
   const { user } = useUserAuth();
-
-  // const [items, setItems] = useState(itemsData);
   const [items, setItems] = useState([]);
-
   const [selectedItemName, setSelectedItemName] = useState("");
-
   const loadItems = async () => {
     try {
       if (user) {
@@ -39,7 +35,7 @@ export default function Page() {
     try {
       if (user) {
         const newItemId = await addItem(user.uid, newItem);
-        newItem.id = newItemId;
+        newItem.docId = newItemId;
         setItems((prevItems) => [...prevItems, newItem]);
       }
     } catch (error) {
@@ -51,7 +47,9 @@ export default function Page() {
     try {
       if (user) {
         await deleteItem(user.uid, itemId);
-        setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+        setItems((prevItems) =>
+          prevItems.filter((item) => item.docId !== itemId)
+        );
       }
     } catch (error) {
       console.error("Error deleting item: ", error);
@@ -78,7 +76,7 @@ export default function Page() {
   }
 
   return (
-    <main className="bg-slate-950">
+    <main className="flex min-h-screen flex-col p-2 bg-black text-white">
       <h2 className="text-3xl font-bold text-white">Shopping List</h2>
       <div className="flex space-x-2">
         <div className="flex-1">

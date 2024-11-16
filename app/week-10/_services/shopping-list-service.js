@@ -16,7 +16,7 @@ export const getItems = async (userId) => {
 
     const items = [];
     itemsSnapshot.forEach((doc) => {
-      items.push({ id: doc.id, ...doc.data() });
+      items.push({ docId: doc.id, ...doc.data() });
     });
 
     return items;
@@ -30,7 +30,7 @@ export const addItem = async (userId, item) => {
   try {
     const itemsRef = collection(db, `users/${userId}/items`);
     const docRef = await addDoc(itemsRef, item);
-    return docRef.id;
+    return docRef.docId;
   } catch (error) {
     console.error("Error adding item: ", error);
     throw new Error("Error adding item");
