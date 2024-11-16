@@ -78,8 +78,12 @@ export default function Page() {
   return (
     <main className="flex min-h-screen flex-col p-2 bg-black text-white">
       <h2 className="text-3xl font-bold text-white">Shopping List</h2>
-      <div className="flex space-x-2">
-        <div className="flex-1">
+      <div className="flex gap-10 mt-4">
+        {" "}
+        {/* Increased gap between divs */}
+        <div className="w-1/8">
+          {" "}
+          {/* Reduced width of the left div */}
           <NewItem onAddItem={handleAddItem} />
           <ItemList
             items={items}
@@ -87,7 +91,9 @@ export default function Page() {
             onDeleteItem={handleDeleteItem}
           />
         </div>
-        <div className="flex-1">
+        <div className="w-2/3">
+          {" "}
+          {/* Increased width of the right div */}
           {selectedItemName && <MealIdeas ingredient={selectedItemName} />}
         </div>
       </div>
